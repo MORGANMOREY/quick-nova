@@ -13,3 +13,11 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+node_modules/
+quiznova-backend/.env
+quiznova-web/.env
+quiznova-web/.env.production
+quiznova-web/dist/
+quiznova-backend/node_modules/
+quiznova-web/node_modules/

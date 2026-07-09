@@ -1,0 +1,581 @@
+ ⚡
+QuizNova
+Product Requirements Document
+Version
+2.0
+Status
+Active
+Year
+2025
+
+
+
+🚀  Executive Summary
+The big picture — what QuizNova is and why it will win
+
+QuizNova is an AI-powered, gamified quiz platform purpose-built for India's 300M+ student and aspirant market. It transforms rote, passive learning into an addictive daily habit by combining adaptive difficulty, instant AI explanations, real-time competition, and rich gamification — delivered in both Hindi and English.
+🎯 Vision:  Make learning as addictive as scrolling — one quiz at a time.
+🧭 Mission:  Help every Indian student learn faster, retain more, and stay motivated through data-driven, personalised micro-learning.
+📍 Market:  India-first (Bharat + metros), Hindi + English, mobile-only.
+
+Why Now?
+Three tailwinds have created a once-in-a-decade opening:
+	•	India has 900M+ smartphone users; cheap data has put learning apps within reach of Tier-2/3 cities.
+	•	Existing apps (Unacademy, BYJU's) are expensive, heavy, and built for passive consumption — not habit formation.
+	•	GPT-class AI now makes personalised tutoring economically viable at scale for the first time.
+
+Competitive Positioning
+Dimension
+QuizNova
+Duolingo
+Unacademy
+Core Loop
+Quiz → Feedback → XP → Streak
+Lesson → Exercise → Streak
+Watch lecture → Test
+AI Personalization
+✅ Deep (adaptive difficulty)
+⚠️ Partial
+❌ Minimal
+Hindi Support
+✅ Full (Hindi + Hinglish)
+❌ No
+⚠️ Partial
+Entry Price
+Free / ₹99/mo
+Free / ₹830/mo
+Free / ₹7,000+/course
+
+🎯  Goals & Success Metrics
+How we define and measure success
+
+Primary Goals
+	•	Drive daily active usage through habit-forming features (streaks, daily quiz).
+	•	Achieve measurable improvement in learning retention (spaced repetition, mistake review).
+	•	Build a sustainable monetisation funnel targeting 3–5% paid conversion.
+	•	Become the #1 quiz app for Indian students within 18 months of launch.
+
+North Star KPIs
+DAU/MAU
+Engagement Ratio
+Target ≥ 30%
+>5 min
+Avg. Session Time
+Target per session
+>70%
+Quiz Completion Rate
+Target at launch
+>30%
+Day-7 Retention
+Target D7
+3–5%
+Paid Conversion
+Within 6 months
+
+Supporting Metrics
+Metric
+Definition
+Target
+Streak Maintenance Rate
+% users with ≥7-day streak
+≥ 25% of DAU
+Leaderboard Participation
+% users who open leaderboard weekly
+≥ 40%
+AI Explanation Read Rate
+% who read full explanation after wrong answer
+≥ 60%
+Referral Rate
+Organic invites per 100 users / month
+≥ 15
+Paid Churn Rate
+% premium users cancelling monthly
+≤ 5%
+
+👥  Target Users & Personas
+Who we're building for
+
+🎓 Persona 1: Priya, Class 10 Student
+Age: 15  |  City: Patna  |  Device: ₹8,000 Android phone
+Goals
+	•	Crack Class 10 board exams
+	•	Learn GK for upcoming school quiz competition
+Pain Points
+	•	Textbooks feel boring and passive
+	•	No way to know where she's weak
+	•	Friends don't study — needs motivation
+What QuizNova gives her
+	•	Daily challenges + streak = motivation loop
+	•	AI spots her weak topics automatically
+	•	Leaderboard creates friendly competition
+🎯 Persona 2: Arjun, UPSC Aspirant
+Age: 23  |  City: Lucknow  |  Device: Mid-range iPhone
+Goals
+	•	Clear UPSC Prelims GS paper
+	•	Revise current affairs daily
+Pain Points
+	•	Premium courses are too expensive
+	•	Mock tests don't explain why answers are wrong
+	•	Hard to maintain consistency while working
+What QuizNova gives him
+	•	Curated UPSC packs at ₹99/month
+	•	Deep AI explanations after each question
+	•	5-minute daily quiz fits his schedule
+
+User Pain Points → Feature Mapping
+Pain Point
+QuizNova Solution
+Boring, passive learning
+Gamified quizzes, XP, streaks, levels
+No feedback after mistakes
+Instant AI-powered explanation for every question
+Lack of motivation / consistency
+Daily streak, leaderboard, notification nudges
+No personalisation
+Adaptive difficulty engine + weak-topic detection
+English-only content
+Full Hindi + Hinglish UI and question bank
+Expensive quality content
+Freemium model from ₹99/month
+
+📱  Product Features
+What we're building, in priority order
+
+Feature Roadmap Overview
+Phase
+Focus
+Timeline
+Status
+MVP
+Auth, Quiz Engine, Gamification, Leaderboard
+Weeks 1–6
+🔨 In Progress
+Phase 2
+AI Personalization, Analytics, Localization
+Months 3–5
+📋 Planned
+Phase 3
+Voice Quiz, AI Tutor, Offline Mode, Exam Packs
+Months 6–12
+🔭 Future
+
+MVP Features (Phase 1)
+1. User Authentication
+	•	Mobile OTP sign-up (primary for Indian users)
+	•	Google OAuth sign-in
+	•	Guest mode for first-quiz try-before-sign-up flow
+	•	Profile: avatar, username, grade/exam target selection
+💡 Design Note: Minimise friction — new users should reach their first quiz in under 60 seconds from install.
+
+2. Home Screen
+Component
+Description & Business Rationale
+Daily Streak 🔥
+Displays current streak count. Streak protection mechanic available for premium users. Primary retention driver — proven by Duolingo research to increase 7-day retention by 2.4x.
+XP & Level Bar
+Visual progress indicator. Fills with XP earned per quiz. Triggers level-up celebration animation — dopamine hit that encourages another quiz.
+Daily Quiz Card
+Pinned card with rotating daily challenge. Shared across all users — creates a common conversation topic and social virality.
+Category Grid
+Scrollable cards: GK, Science, Math, History, Current Affairs, Exam-Specific. Personalised order based on user history (Phase 2).
+Live Leaderboard Strip
+Shows user's rank vs. friends. Creates daily pull to open app and maintain rank.
+
+3. Quiz Engine
+	•	Multiple-choice questions (MCQ) — 4 options, 1 correct
+	•	Timer per question (optional mode — toggled by user)
+	•	Question shuffle and option shuffle to prevent memorisation
+	•	Tap to answer → instant colour-coded feedback (green/red)
+	•	AI Explanation card shown after each answer (correct or wrong)
+	•	Difficulty levels: Easy / Medium / Hard per question, tagged at creation
+	•	Session length: 5, 10, or 20 questions (user-selectable)
+📐 Quiz Flow:  Start Screen → Q1 → [Answer] → Feedback + Explanation → Q2 → ... → Results Screen
+⏱️ Target latency: question load < 400ms on 4G; explanation fetch < 800ms via AI API.
+
+4. Results & Feedback Screen
+	•	Score summary: correct / total, accuracy %, time taken, XP earned
+	•	Mistake review: tap any wrong question to re-read explanation
+	•	Share card: generate a branded result image for WhatsApp / Instagram Stories
+	•	CTA: Play Again | Try Different Category | Challenge a Friend
+
+5. Leaderboard
+	•	Global all-time leaderboard (XP-based)
+	•	Weekly leaderboard — resets Monday 00:00 IST
+	•	Friends leaderboard (Phase 2 — after social graph is built)
+	•	User's own rank always pinned at bottom of list
+
+6. Core Gamification
+Element
+Mechanic
+Motivation Psychology
+XP Points
+Earned per question answered, bonus for speed & accuracy
+Variable reward — same mechanism as social media likes
+Levels
+XP thresholds unlock next level (1–100 scale)
+Progress & mastery — sense of growth over time
+Daily Streak
+Consecutive days with ≥1 completed quiz
+Loss aversion — fear of breaking streak drives return visits
+Badges
+Achievement badges (MVP Phase 2)
+Status & identity — users display badges on profile
+
+Phase 2 Features — AI & Social
+AI Personalization Engine
+	•	Difficulty Adjustment: after each quiz, the engine recalculates difficulty score per topic using a modified Item Response Theory (IRT) model.
+	•	Weak Topic Detection: flags topics where accuracy < 50% over ≥5 attempts; surfaces on home screen as 'Practice Zone'.
+	•	Quiz Recommendations: daily recommended quiz generated using collaborative filtering (what similar users found useful).
+	•	AI Tutor Chat (Phase 3 preview): conversational follow-up — 'Why is this answer right?' resolved in a chat thread.
+
+
+
+Analytics Dashboard (User-Facing)
+	•	Topic-wise accuracy heatmap (7-day, 30-day, all-time)
+	•	Speed trend: average time per question over time
+	•	Strength & weakness radar chart across 6 subject categories
+	•	Comparative benchmark: 'You scored better than X% of users in Science this week'
+
+Phase 3 Features — Platform Expansion
+	•	🎤 Voice-Based Quiz: answer questions verbally using device microphone; Whisper API for transcription.
+	•	🤖 AI Tutor Mode: multi-turn conversational tutoring powered by Claude/GPT — explains concepts, generates practice questions on demand.
+	•	📴 Offline Quizzes: cached question packs playable without internet; sync results on reconnect.
+	•	📦 Exam-Specific Packs: UPSC, SSC CGL, JEE, NEET, CLAT — curated and expert-reviewed question banks sold as add-ons.
+	•	🏫 School Partnerships: white-labelled portal for schools to assign quizzes, track class-level performance, and export reports.
+
+🧩  User Flows
+How users move through the product
+
+Flow 1: New User Onboarding
+#
+Screen / Step
+Key Design Decisions
+1
+App Install → Splash Screen
+Show value prop in 3-second animation — 'Learn. Practice. Win.' 
+2
+Sign-up (OTP / Google)
+Google one-tap preferred; OTP as fallback. Skip option leads to guest mode.
+3
+Interest Selection
+Pick 3 categories from a visual card grid. Pre-selects personalisation without feeling like a form.
+4
+Profile Setup
+Optional: name, class/exam, avatar. Skip-able — don't block progress.
+5
+Onboarding Quiz (3 Qs)
+A fun 3-question mini-quiz in chosen category. Shows the core loop immediately.
+6
+Results + XP Celebration
+First XP earned! Streak started! Sets expectation for daily habit.
+7
+Home Screen
+Home with personalised recommendation ready. Nudge: 'Come back tomorrow to keep your streak!'
+
+Flow 2: Taking a Quiz
+	•	Home Screen: user taps a category card or the Daily Quiz card
+	•	Quiz Lobby: select length (5 / 10 / 20 Qs), difficulty, timer on/off
+	•	Quiz Loop: Question displayed → user selects answer → instant feedback → AI explanation (auto-collapsed, expandable)
+	•	Progress Bar: visual indicator of question N / total at top
+	•	Results Screen: score, XP gained, share card, next-action CTA
+
+Flow 3: Daily Engagement Loop
+Touchpoint
+How QuizNova Hooks the User
+Push Notification
+Sent at user's preferred time: '🔥 Day 4 streak at risk! Take today's quiz now.'
+Home Screen Anchor
+Daily Quiz card always at top — one-tap to play, zero friction.
+Post-Quiz CTA
+'Try Hard Mode' or 'Practice Weak Topics' — next action always presented.
+Leaderboard Check
+Users open leaderboard to see rank — passive engagement even without quizzing.
+Weekly Email Digest
+Summary of week: accuracy %, rank change, weak topics, progress badge earned.
+
+🏗️  Technical Architecture
+How QuizNova is built
+
+Technology Stack
+Layer
+Technology
+Rationale
+Frontend
+Flutter (Android-first)
+Single codebase for Android + iOS; fast UI; strong in India market
+Backend / BaaS
+Firebase (Auth, Firestore, FCM)
+Zero DevOps for MVP; generous free tier
+AI Layer
+OpenAI GPT-4o / Claude 3
+Explanation generation, question creation, weak-topic coaching
+Analytics
+Firebase Analytics + Mixpanel
+Event-level funnel analysis; cohort retention; A/B testing
+CDN / Media
+Cloudflare R2 + CDN
+Low-cost object storage; fast delivery for question images
+Search / NLP
+Algolia (Phase 2)
+Instant question search; semantic similarity for dedup
+
+Data Model (Enhanced)
+Collection
+Key Fields
+Notes
+users
+user_id, name, level, xp, streak, streak_shield_count, interests[], lang_pref, created_at
+Lang pref enables Hindi/English toggle per user
+questions
+question_id, text_en, text_hi, options[], correct_idx, explanation_en, explanation_hi, category, difficulty_score, source, reviewed_by
+Bilingual fields; difficulty_score is float updated by IRT model
+quizzes
+quiz_id, category, difficulty_label, question_ids[], created_at, is_daily, exam_pack_id
+is_daily flag pins quiz to Daily Quiz card
+attempts
+attempt_id, user_id, quiz_id, answers[], score, accuracy, time_ms, xp_earned, created_at
+answers[] stores per-question time for speed analytics
+
+user_stats
+user_id, topic_accuracy{}, avg_speed{}, weak_topics[], rank_global, rank_weekly
+Materialised view updated async post-attempt
+
+Non-Functional Requirements
+Category
+Requirement
+Target
+Performance
+Quiz question load time
+< 400ms on 4G
+Performance
+AI explanation fetch time
+< 800ms p95
+Reliability
+App uptime SLA
+99.5% monthly
+Scalability
+Concurrent users (Day 1 launch)
+Handle 10,000 concurrent
+Security
+Data encryption
+AES-256 at rest; TLS 1.3 in transit
+Accessibility
+Font size & contrast
+WCAG 2.1 AA compliant
+App Size
+Initial APK download size
+< 15 MB (critical for Tier-2/3 users)
+
+🎨  UI / UX Guidelines
+Design principles and key interface decisions
+
+Design Principles
+Principle
+What It Means in Practice
+Mobile-First
+All layouts designed for 360–414px width first. No horizontal scrolling. Large touch targets (≥ 48×48dp).
+Speed = Respect
+Every screen loads < 300ms. Skeleton loaders instead of spinners. No blocking modals before core action.
+Celebrate Progress
+Every XP gain, level-up, and streak milestone triggers a micro-animation. Learning should feel rewarding.
+Reduce Cognitive Load
+One primary action per screen. Clear visual hierarchy. No dark patterns.
+India-Aware Design
+High contrast for bright sunlight readability. Works on older Android versions (API 21+). Offline-tolerant.
+
+Visual Design Tokens
+Token
+Value
+Usage
+Primary
+#4F46E5 (Indigo)
+Buttons, active states, progress bars
+Secondary
+#7C3AED (Purple)
+Badges, level indicators
+Success
+#10B981 (Green)
+Correct answer feedback, streak indicator
+Danger
+#EF4444 (Red)
+Wrong answer feedback, time-running-out warning
+Warning
+#F59E0B (Amber)
+Streak-at-risk alerts, near-deadline nudges
+Font
+Noto Sans (en) / Noto Sans Devanagari (hi)
+Excellent Unicode coverage; free; renders well at small sizes
+Base size
+16sp
+All body text; scale up for headings
+
+💰  Monetisation Strategy
+How QuizNova generates sustainable revenue
+
+Free Tier
+QuizNova Plus (₹99/mo)
+QuizNova Pro (₹299/mo)
+5 quizzes / day
+Basic leaderboard
+Ad-supported
+English only
+Unlimited quizzes ✅
+No ads ✅
+Hindi + Hinglish ✅
+Advanced analytics ✅
+Streak shield (3/month) ✅
+Everything in Plus ✅
+Exam-specific packs ✅
+AI Tutor access ✅
+
+Downloadable reports ✅
+
+Additional Revenue Streams
+Revenue Stream
+Description
+Projected Revenue (Year 1)
+Exam Prep Packs
+One-time purchase: UPSC (₹499), JEE (₹399), NEET (₹399) — curated, expert-reviewed
+₹20–40L
+Sponsored Quizzes
+Brand-sponsored quiz rounds (edtech, FMCG targeting students)
+₹10–15L
+School B2B
+Annual license per school: teacher dashboard + class performance reports
+₹15–25L
+Coin In-App Purchases
+Virtual coins for streak shields, extra attempts, cosmetic avatars
+₹5–10L
+
+🚀  Go-To-Market Strategy
+How we acquire, activate, and retain users
+
+Phase 1: Launch (Months 1–2)
+Target: Students in UP, Bihar, Delhi via organic social
+	•	Create Instagram Reels showing quiz challenges ('Kya tum ye solve kar sakoge? 🔥')
+	•	YouTube Shorts: '5 GK questions every Class 10 student should know'
+	•	WhatsApp seeding: seed in student groups via college influencers
+	•	Google Play optimisation: keyword-rich listing, localized screenshots
+	•	Target CAC: < ₹30 via organic
+Phase 2: Growth (Months 3–5)
+Target: Scale to 100K DAU; launch competitive exam category
+	•	Paid UA: Meta ads targeting Class 10–12 students (₹5–15 CPM)
+	•	Referral programme: invite a friend → both get 7-day streak shield
+	•	UPSC/SSC influencer partnerships on YouTube (₹10K–50K/video)
+	•	Press outreach: EdTech journalists, startup media (YourStory, Inc42)
+
+Retention Mechanics (Post-Acquisition)
+	•	Day 1: onboarding quiz immediately → XP earned → streak starts → push notification scheduled
+	•	Day 3: 'You're on a 3-day streak! Don't stop now.' + personalised weak topic quiz
+	•	Day 7: first weekly leaderboard result + badge for 'First Week Champion'
+	•	Day 14: upgrade nudge — 'Unlock unlimited quizzes + exam packs for ₹99'
+	•	Day 30: monthly report card + personalised improvement data
+
+⚠️  Risks & Mitigations
+What could go wrong and how we prevent it
+
+#
+Risk
+Severity
+Mitigation
+Owner
+1
+Low Day-7 retention
+High
+Daily streak + loss-aversion notifications + streak shield mechanic
+Product + Growth
+2
+Poor content quality
+High
+3-layer review: AI draft → subject expert review → community flag system
+Content Team
+3
+AI explanation hallucinations
+High
+Fact-check layer via RAG on curated curriculum; user 'Report Error' button
+AI/ML Team
+4
+Competition from incumbents
+Medium
+Hyper-focus on gamification + Hindi + price point — not competing on content volume
+Strategy
+5
+Firebase scaling costs
+Medium
+Denormalise reads-heavy data; cache leaderboards in Redis at 50K+ DAU
+Engineering
+6
+Low paid conversion
+Medium
+A/B test paywall timing (D7 vs D14); trial period (3-day free premium)
+Growth
+7
+App rejection (Play Store)
+Low
+Review policy on quiz/gambling adjacency; no real-money elements in MVP
+Engineering
+
+📅  MVP Timeline
+6-week build plan
+
+Week
+Sprint
+Key Deliverables
+Done When
+Wk 1
+Design Sprint
+Figma wireframes for all MVP screens; design system tokens; Firebase project setup; Firestore schema migration scripts
+All screens reviewed & approved
+Wk 2
+Auth + Home
+OTP auth working; Google OAuth; home screen with placeholder data; category card grid; CI/CD pipeline
+New user can sign in and see home
+Wk 3
+Quiz Engine
+MCQ quiz flow end-to-end; timer mode; instant feedback; AI explanation API integrated (OpenAI)
+User can complete a 10-question quiz
+Wk 4
+Gamification + Results
+XP system; level calculation; daily streak logic; results screen; share card generator
+XP increments correctly; streak tracks across days
+Wk 5
+Leaderboard + Polish
+Global leaderboard query; weekly reset cron; push notifications (FCM); deep-link for share card
+Leaderboard shows correct ranking
+Wk 6
+QA + Launch
+Regression testing on Android 5 devices; performance benchmarks; Play Store listing; soft launch to 500 beta users
+Crash-free rate ≥ 99%; store listing live
+
+MVP Launch Checklist
+✓
+Item
+✓
+Item
+✓
+✅ Login system (OTP + Google)
+✓
+✅ Score + AI explanation per question
+✓
+✅ 3 quiz categories (GK, Science, Math)
+✓
+✅ Global & weekly leaderboard
+✓
+✅ 30+ reviewed questions per category
+✓
+✅ XP, levels, daily streak
+✓
+✅ Quiz engine (MCQ, timer, feedback)
+✓
+✅ Push notifications (FCM)
+✓
+✅ Results screen with share card
+✓
+✅ Play Store listing with store screenshots
+
+⚡
+QuizNova is not just a quiz app.
+It's a habit-forming learning platform that makes every Indian student's preparation smarter, faster, and more rewarding.
+Executed well, QuizNova will be the Duolingo of Indian exam prep.
+
+Document Owner: Product Team  |  Version: 2.0  |  Last Updated: June 2025  |  Classification: Confidential

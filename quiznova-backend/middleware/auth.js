@@ -1,0 +1,31 @@
+import jwt from 'jsonwebtoken';
+
+const authMiddleware = (req, res, next) => {
+  // Get token from header
+  const authHeader = req.header('Authorization');
+  if (!authHeader) {
+    return res.status(401).json({ message: 'No authorization header, access denied' });
+  }
+
+  // Expect Bearer <token>
+  const parts = authHeader.split(' ');
+  if (parts.length !== 2 || parts[0] !== 'Bearer') {
+    return res.status(401).json({ message: 'Authorization header format must be Bearer <token>' });
+  }
+
+  const token = parts[1];
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'super_secret_quiznova_token_key_123!');
+    req.user = {
+      id: decoded.userId,
+      role: decoded.role
+    };
+    next();
+  } catch (error) {
+    console.error('JWT validation error:', error.message);
+    res.status(401).json({ message: 'Token is invalid or expired' });
+  }
+};
+
+export default authMiddleware;

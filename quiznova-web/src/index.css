@@ -9,7 +9,7 @@
 :root {
   --bg-dark: #0f172a;
   --bg-darker: #020617;
-  --nav-bg: rgba(2, 6, 23, 0.85);
+  --nav-bg: #090d16;
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --border-subtle: rgba(255, 255, 255, 0.08);
@@ -1005,7 +1005,7 @@ input:checked + .slider:before { transform: translateX(20px); }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 .close-btn { font-size: 1.5rem; cursor: pointer; color: var(--text-muted); transition: color 0.2s; }
 .close-btn:hover { color: white; }

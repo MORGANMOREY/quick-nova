@@ -1305,18 +1305,18 @@ function Sidebar({ isOpen, onClose, onNavigate, games, userRole, onLogout, onLog
     if (currentUser && currentUser.avatar) {
       if (currentUser.avatar.startsWith('http')) {
         return (
-          <img src={currentUser.avatar} alt="Avatar" style={{ width: '80px', height: '80px', borderRadius: '50%', marginBottom: '1rem', objectFit: 'cover', border: '2px solid var(--accent-1)' }} />
+          <img src={currentUser.avatar} alt="Avatar" style={{ width: '60px', height: '60px', borderRadius: '50%', marginBottom: '0.75rem', objectFit: 'cover', border: '2px solid var(--accent-1)' }} />
         );
       }
       return (
-        <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'linear-gradient(135deg, #10b981, #3b82f6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.2rem', color: 'white', fontWeight: 'bold', marginBottom: '1rem', boxShadow: '0 8px 25px rgba(16,185,129,0.25)' }}>
+        <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'linear-gradient(135deg, #10b981, #3b82f6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.8rem', color: 'white', fontWeight: 'bold', marginBottom: '0.75rem', boxShadow: '0 8px 25px rgba(16,185,129,0.25)' }}>
           {currentUser.avatar}
         </div>
       );
     }
 
     return (
-      <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'linear-gradient(135deg, #10b981, #3b82f6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.2rem', color: 'white', fontWeight: 'bold', marginBottom: '1rem', boxShadow: '0 8px 25px rgba(16,185,129,0.25)' }}>
+      <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'linear-gradient(135deg, #10b981, #3b82f6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.8rem', color: 'white', fontWeight: 'bold', marginBottom: '0.75rem', boxShadow: '0 8px 25px rgba(16,185,129,0.25)' }}>
         {userRole === 'admin' ? 'AD' : 'US'}
       </div>
     );
@@ -1344,7 +1344,7 @@ function Sidebar({ isOpen, onClose, onNavigate, games, userRole, onLogout, onLog
 
         <div
           style={{
-            padding: '1.5rem 1rem', display: 'flex', flexDirection: 'column', alignItems: 'center',
+            padding: '1rem 0.75rem', display: 'flex', flexDirection: 'column', alignItems: 'center',
             borderBottom: '1px solid var(--border-subtle)', background: 'rgba(255,255,255,0.01)',
             cursor: 'pointer', transition: 'background 0.2s ease'
           }}
@@ -1418,7 +1418,7 @@ function Sidebar({ isOpen, onClose, onNavigate, games, userRole, onLogout, onLog
           {games.filter(g => !g.isHidden).map((game, idx) => (
             <div key={game._id || game.id || game.name} className="sidebar-item" onClick={() => {
               onNavigate('quiz', {
-                title: game.name,
+                title: game.title || game.name,
                 image: game.image,
                 questions: game.questions || [{ q: "Did you know this game doesn't have custom questions yet?", options: ["Yes", "No"], ans: 0, exp: "We're adding them soon!" }]
               });
@@ -1427,7 +1427,7 @@ function Sidebar({ isOpen, onClose, onNavigate, games, userRole, onLogout, onLog
               <div className="sidebar-icon">
                 <img src={game.image} alt="" />
               </div>
-              <div className="sidebar-text">{game.name} {idx === 0 && <span className="new-badge">NEW</span>}</div>
+              <div className="sidebar-text">{game.title || game.name} {idx === 0 && <span className="new-badge">NEW</span>}</div>
             </div>
           ))}
           <div className="sidebar-item" onClick={onClose}>
@@ -1438,7 +1438,13 @@ function Sidebar({ isOpen, onClose, onNavigate, games, userRole, onLogout, onLog
           <div className="sidebar-section-title">KMS Academy Quizzes</div>
           {FEATURED_QUIZZES.map(quiz => (
             <div key={quiz._id || quiz.id || quiz.title} className="sidebar-item" onClick={() => { onNavigate('quiz', quiz); onClose(); }}>
-              <div className="sidebar-icon">❓</div>
+              <div className="sidebar-icon" style={{ overflow: 'hidden', borderRadius: '4px' }}>
+                {quiz.image ? (
+                  <img src={quiz.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                  '❓'
+                )}
+              </div>
               <div className="sidebar-text">{quiz.title}</div>
             </div>
           ))}
@@ -2087,17 +2093,17 @@ function App() {
       </div>
 
       {showBanner && latestGame && (
-        <div style={{ background: 'var(--accent-gradient)', color: 'white', padding: '0.6rem 2.5rem', textAlign: 'center', position: 'relative', fontSize: '0.95rem', fontWeight: 'bold', zIndex: 50, boxShadow: '0 4px 15px rgba(0,0,0,0.2)' }}>
-          <span style={{ marginRight: '1rem' }}>🎉 LATEST QUIZ ADDED: "{latestGameTitle}" - Test your knowledge and earn XP!</span>
+        <div style={{ background: 'var(--accent-gradient)', color: 'white', padding: '0.75rem 3.5rem 0.75rem 1rem', textAlign: 'center', position: 'relative', fontSize: '0.9rem', fontWeight: 'bold', zIndex: 50, boxShadow: '0 4px 15px rgba(0,0,0,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
+          <span>🎉 LATEST QUIZ ADDED: "{latestGameTitle}" - Test your knowledge and earn XP!</span>
           <button
-            style={{ background: 'rgba(255,255,255,0.25)', border: '1px solid rgba(255,255,255,0.4)', color: 'white', padding: '0.25rem 1rem', borderRadius: '8px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 'bold', transition: 'all 0.2s', whiteSpace: 'nowrap' }}
+            style={{ background: 'rgba(255,255,255,0.25)', border: '1px solid rgba(255,255,255,0.4)', color: 'white', padding: '0.35rem 1rem', borderRadius: '8px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 'bold', transition: 'all 0.2s', whiteSpace: 'nowrap' }}
             onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.35)'}
             onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.25)'}
             onClick={() => handleNavigate('quiz', latestGameObj)}
           >
             Play Now ▶
           </button>
-          <span onClick={() => setShowBanner(false)} style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer', fontSize: '1.2rem', opacity: 0.8, padding: '0.5rem' }} onMouseEnter={e => e.currentTarget.style.opacity = 1} onMouseLeave={e => e.currentTarget.style.opacity = 0.8}>✕</span>
+          <span onClick={() => setShowBanner(false)} style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer', fontSize: '1.2rem', opacity: 0.8, padding: '0.4rem' }} onMouseEnter={e => e.currentTarget.style.opacity = 1} onMouseLeave={e => e.currentTarget.style.opacity = 0.8}>✕</span>
         </div>
       )}
 

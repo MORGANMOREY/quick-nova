@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import authRoutes from './routes/auth.js';
 import quizRoutes, { seedDatabaseIfEmpty } from './routes/quizzes.js';
 import userRoutes, { seedLeaderboardUsersIfEmpty } from './routes/users.js';
+import { verifyMailerConnection } from './utils/mailer.js';
 
 // Load environment variables
 dotenv.config();
@@ -81,6 +82,7 @@ mongoose.connect(MONGODB_URI)
     // Seed initial database content
     seedDatabaseIfEmpty();
     seedLeaderboardUsersIfEmpty();
+    verifyMailerConnection();
 
     // Start Server only after successful DB connection (or handle gracefully)
     const server = app.listen(PORT, () => {
@@ -91,6 +93,7 @@ mongoose.connect(MONGODB_URI)
   .catch((err) => {
     console.error('Database connection error:', err);
     console.log('Starting server in offline/mock database mode on port', PORT);
+    verifyMailerConnection();
 
     // Fallback heartbeat logic for local testing without local mongo running
     app.get('/api/db-status', (req, res) => {
@@ -121,3 +124,5 @@ function setupGracefulShutdown(server) {
   process.on('SIGTERM', () => shutdown('SIGTERM'));
   process.on('SIGINT',  () => shutdown('SIGINT'));
 }
+
+export default app;

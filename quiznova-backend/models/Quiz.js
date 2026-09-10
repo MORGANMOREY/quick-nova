@@ -38,6 +38,14 @@ const QuizSchema = new mongoose.Schema({
     type: String,
     default: 'General'
   },
+  difficulty: {
+    type: String,
+    default: 'Easy'
+  },
+  timerSeconds: {
+    type: Number,
+    default: 15
+  },
   questions: {
     type: [QuestionSchema],
     default: []

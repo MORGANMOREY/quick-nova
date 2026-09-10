@@ -76,6 +76,15 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: null
   },
+  // Password reset
+  passwordResetToken: {
+    type: String,
+    default: null
+  },
+  passwordResetExpires: {
+    type: Date,
+    default: null
+  },
   // Refresh token (hashed)
   refreshToken: {
     type: String,

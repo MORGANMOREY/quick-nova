@@ -1,0 +1,8 @@
+{
+  "buildCommand": "cd quiznova-web && npm install && npm run build",
+  "outputDirectory": "quiznova-web/dist",
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

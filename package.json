@@ -1,0 +1,10 @@
+{
+  "name": "quick-nova",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "cd quiznova-web && npm install && npm run build",
+    "dev": "cd quiznova-web && npm run dev",
+    "start": "cd quiznova-backend && npm start"
+  }
+}

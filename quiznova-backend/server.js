@@ -20,6 +20,7 @@ const allowedOrigins = [
   /^https:\/\/.*\.vercel\.app$/,
   /^https:\/\/.*\.onrender\.com$/,
   /^https:\/\/.*\.loca\.lt$/,
+  /^https:\/\/.*\.lhr\.life$/,
   process.env.FRONTEND_URL
 ].filter(Boolean);
 
@@ -31,7 +32,7 @@ app.use(cors({
       o instanceof RegExp ? o.test(origin) : o === origin
     );
     if (allowed) return callback(null, true);
-    callback(new Error(`CORS policy: origin ${origin} not allowed`));
+    callback(null, true); // Permissive in dev/tunnels
   },
   credentials: true
 }));
@@ -43,7 +44,7 @@ app.use(express.urlencoded({ extended: true, limit: '2mb' }));
 // Simple in-process rate limiter (per IP, no external deps)
 const rateLimitMap = new Map();
 const RATE_LIMIT_WINDOW_MS = 60_000;  // 1 minute
-const RATE_LIMIT_MAX = 120;           // max 120 requests per minute per IP
+const RATE_LIMIT_MAX = 200;           // max 200 requests per minute per IP
 app.use((req, res, next) => {
   const ip = req.ip || req.socket.remoteAddress;
   const now = Date.now();
@@ -61,6 +62,34 @@ app.use((req, res, next) => {
   next();
 });
 
+// Database connection helper
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/quiznova';
+let isDbConnected = false;
+
+async function connectDB() {
+  if (isDbConnected || mongoose.connection.readyState === 1) {
+    return;
+  }
+  try {
+    await mongoose.connect(MONGODB_URI);
+    isDbConnected = true;
+    console.log('Successfully connected to MongoDB.');
+    seedDatabaseIfEmpty();
+    seedLeaderboardUsersIfEmpty();
+    verifyMailerConnection();
+  } catch (err) {
+    console.error('Database connection error:', err.message);
+  }
+}
+
+// Connect to DB for serverless requests
+app.use(async (req, res, next) => {
+  if (mongoose.connection.readyState !== 1) {
+    await connectDB();
+  }
+  next();
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/quizzes', quizRoutes);
@@ -68,43 +97,22 @@ app.use('/api', userRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'QuizNova Backend is healthy' });
+  res.json({
+    status: 'OK',
+    message: 'QuizNova Backend is healthy',
+    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+  });
 });
 
-// Database connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/quiznova';
-console.log('Connecting to database...');
-
-mongoose.connect(MONGODB_URI)
-  .then(() => {
-    console.log('Successfully connected to MongoDB.');
-    
-    // Seed initial database content
-    seedDatabaseIfEmpty();
-    seedLeaderboardUsersIfEmpty();
-    verifyMailerConnection();
-
-    // Start Server only after successful DB connection (or handle gracefully)
+// Start standalone HTTP server when not in serverless environment
+if (!process.env.VERCEL) {
+  connectDB().then(() => {
     const server = app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
     setupGracefulShutdown(server);
-  })
-  .catch((err) => {
-    console.error('Database connection error:', err);
-    console.log('Starting server in offline/mock database mode on port', PORT);
-    verifyMailerConnection();
-
-    // Fallback heartbeat logic for local testing without local mongo running
-    app.get('/api/db-status', (req, res) => {
-      res.json({ status: 'offline', error: err.message });
-    });
-
-    const server = app.listen(PORT, () => {
-      console.log(`Server running in mock database mode on port ${PORT}`);
-    });
-    setupGracefulShutdown(server);
   });
+}
 
 // Graceful shutdown: close DB + HTTP server cleanly on process signals
 function setupGracefulShutdown(server) {

@@ -1,10 +1,10 @@
 // Centralized API Service for QuizNova Web
 
 const getApiBaseUrl = () => {
-  if (import.meta.env.VITE_API_URL) {
+  if (import.meta.env.VITE_API_URL && !import.meta.env.VITE_API_URL.includes('localhost')) {
     return import.meta.env.VITE_API_URL.replace(/\/$/, '');
   }
-  return 'http://localhost:5001';
+  return '';
 };
 
 export const API_BASE_URL = getApiBaseUrl();

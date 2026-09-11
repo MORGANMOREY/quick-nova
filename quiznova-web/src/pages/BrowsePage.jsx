@@ -201,8 +201,8 @@ export default function BrowsePage({ isAllQuizzesView = false, searchQuery: exte
           <div className="top-grid">
             {/* Left Side: Featured Quizzes */}
             <div className="featured-quizzes">
-              {featuredQuizzes.map((quiz) => (
-                <div key={quiz._id || quiz.id} className="featured-card" onClick={() => goToQuiz(quiz)}>
+              {featuredQuizzes.map((quiz, idx) => (
+                <div key={quiz._id || quiz.id || `featured-${idx}`} className="featured-card" onClick={() => goToQuiz(quiz)}>
                   <img src={quiz.image} className="f-card-img" alt={quiz.title} loading="lazy" decoding="async" />
                   <div className="f-card-body">
                     <h3>{quiz.title}</h3>
@@ -215,9 +215,9 @@ export default function BrowsePage({ isAllQuizzesView = false, searchQuery: exte
             {/* Right Side: New Quizzes List */}
             <div className="new-quizzes">
               <h2>New Quizzes</h2>
-              {newQuizzes.slice(0, 8).map((quiz) => (
+              {newQuizzes.slice(0, 8).map((quiz, idx) => (
                 <div
-                  key={quiz._id || quiz.id || quiz.title}
+                  key={quiz._id || quiz.id || `new-${idx}-${quiz.title}`}
                   className="list-card"
                   onClick={() => goToQuiz(quiz)}
                   style={{ cursor: 'pointer', transition: 'background 0.2s', borderRadius: '10px', overflow: 'hidden', minHeight: '90px' }}
@@ -283,10 +283,10 @@ export default function BrowsePage({ isAllQuizzesView = false, searchQuery: exte
           <section className="editors-picks-section">
             <h2>{editorsPicksTitle || "Editors' Picks"}</h2>
             <div className="ep-grid">
-              {EDITORS_PICKS_DATA.map((quiz) => {
+              {EDITORS_PICKS_DATA.map((quiz, idx) => {
                 const questions = EDITORS_PICKS_QUESTIONS[quiz.id] || [{ q: `Question about ${quiz.title}`, options: ['Option A', 'Option B', 'Option C', 'Option D'], ans: 0, exp: `Answer explanation for ${quiz.title}` }];
                 return (
-                  <div key={quiz.id} className="ep-card" onClick={() => goToQuiz({ ...quiz, questions })}>
+                  <div key={`ep-${quiz.id || idx}`} className="ep-card" onClick={() => goToQuiz({ ...quiz, questions })}>
                     <div className="ep-img-container">
                       <img
                         src={quiz.image}
@@ -314,10 +314,10 @@ export default function BrowsePage({ isAllQuizzesView = false, searchQuery: exte
           <section className="editors-picks-section">
             <h2>{popularTitle || 'Popular'}</h2>
             <div className="ep-grid">
-              {POPULAR_DATA.map((quiz) => {
+              {POPULAR_DATA.map((quiz, idx) => {
                 const questions = POPULAR_QUESTIONS[quiz.id] || [{ q: `Question about ${quiz.title}`, options: ['Option A', 'Option B', 'Option C', 'Option D'], ans: 0, exp: `Answer explanation for ${quiz.title}` }];
                 return (
-                  <div key={quiz.id} className="ep-card" onClick={() => goToQuiz({ ...quiz, questions })}>
+                  <div key={`pop-${quiz.id || idx}`} className="ep-card" onClick={() => goToQuiz({ ...quiz, questions })}>
                     <div className="ep-img-container">
                       <img
                         src={quiz.image}

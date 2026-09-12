@@ -249,6 +249,150 @@ export const FEATURED_QUIZZES = [
     ]
   },
   {
+    id: 102,
+    title: "COMIC BOOK SUPERHEROES #2",
+    desc: "Icons of the Comic Universe",
+    image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80",
+    category: "Entertainment",
+    difficulty: "Medium",
+    timerSeconds: 15,
+    isFeatured: true,
+    questions: [
+      {
+        q: "Mjolnir can normally be lifted only by those deemed what?",
+        options: ["Powerful", "Worthy", "Immortal", "Divine"],
+        ans: 1,
+        exp: "Odin enchanted Mjolnir so that only those deemed worthy can wield it."
+      },
+      {
+        q: "Which superhero rules the underwater kingdom of Atlantis?",
+        options: ["Namor", "Ocean Master", "Aquaman", "Aqualad"],
+        ans: 2,
+        exp: "Aquaman, also known as Arthur Curry, is the ruler of Atlantis."
+      },
+      {
+        q: "A Green Lantern's power ring is primarily fueled by which emotion?",
+        options: ["Fear", "Hope", "Willpower", "Rage"],
+        ans: 2,
+        exp: "Green Lantern power rings channel the emotional energy of willpower."
+      },
+      {
+        q: "Natasha Romanoff is best known by what codename?",
+        options: ["Mockingbird", "Black Widow", "White Tiger", "Silver Sable"],
+        ans: 1,
+        exp: "Natasha Romanoff is a master spy, assassin, and member of the Avengers."
+      },
+      {
+        q: "Which superhero lost his eyesight in childhood but gained extraordinary heightened senses?",
+        options: ["Moon Knight", "Daredevil", "Punisher", "Blade"],
+        ans: 1,
+        exp: "Matt Murdock lost his eyesight as a child but developed extraordinary heightened senses."
+      },
+      {
+        q: "Wade Wilson is better known by which name?",
+        options: ["Deathstroke", "Deadpool", "Bullseye", "Taskmaster"],
+        ans: 1,
+        exp: "Deadpool is known for his healing factor, witty humor, and breaking the fourth wall."
+      },
+      {
+        q: "Which Batman villain leaves behind riddles to challenge his opponents?",
+        options: ["Scarecrow", "Penguin", "Riddler", "Two-Face"],
+        ans: 2,
+        exp: "The Riddler commits crimes centered on puzzles, clues, and riddles."
+      },
+      {
+        q: "Harley Quinn was originally employed as what before turning to crime?",
+        options: ["Police detective", "Psychiatrist", "Journalist", "Lawyer"],
+        ans: 1,
+        exp: "Before becoming Harley Quinn, Harleen Quinzel worked as a psychiatrist at Arkham Asylum."
+      },
+      {
+        q: "Which mystical artifact is most closely associated with Doctor Strange?",
+        options: ["Mother Box", "Cosmic Cube", "Eye of Agamotto", "Infinity Gauntlet"],
+        ans: 2,
+        exp: "The Eye of Agamotto is one of Doctor Strange's most iconic magical artifacts."
+      },
+      {
+        q: "Hell's Kitchen is the primary area protected by which superhero?",
+        options: ["Punisher", "Cloak", "Daredevil", "Ghost Rider"],
+        ans: 2,
+        exp: "Daredevil serves as the vigilante protector of Hell's Kitchen, a neighborhood in New York City."
+      }
+    ]
+  },
+  {
+    id: 101,
+    title: "COMIC BOOK SUPERHEROES #1",
+    desc: "Icons of the Comic Universe",
+    image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80",
+    category: "Entertainment",
+    difficulty: "Medium",
+    timerSeconds: 15,
+    isFeatured: true,
+    questions: [
+      {
+        q: "Which mutant superhero possesses an adamantium-laced skeleton and a remarkable healing factor?",
+        options: ["Cyclops", "Wolverine", "Gambit", "Colossus"],
+        ans: 1,
+        exp: "Wolverine's mutant healing factor and adamantium skeleton make him one of Marvel's most formidable heroes."
+      },
+      {
+        q: "Which superhero, whose civilian identity is a physicist, transforms after exposure to gamma radiation?",
+        options: ["Thing", "Hulk", "Beast", "Colossus"],
+        ans: 1,
+        exp: "Bruce Banner transforms into the Hulk after accidental exposure to gamma radiation. Unlike characters such as She-Hulk and Red Hulk, whose powers were acquired through other gamma-related circumstances, Bruce Banner's transformation was directly triggered by the radiation accident."
+      },
+      {
+        q: "Who is the billionaire inventor behind the Iron Man armor?",
+        options: ["Reed Richards", "Lex Luthor", "Tony Stark", "Norman Osborn"],
+        ans: 2,
+        exp: "Tony Stark built the first Iron Man suit to escape captivity and later became Iron Man."
+      },
+      {
+        q: "Which superhero uses detective skills, martial arts, and technology rather than superhuman powers to protect Gotham City?",
+        options: ["Green Arrow", "Nightwing", "Batman", "Moon Knight"],
+        ans: 2,
+        exp: "Batman, the superhero identity of billionaire Bruce Wayne, uses his intelligence, detective abilities, martial arts training, and advanced technology to fight crime in Gotham City despite having no superhuman powers."
+      },
+      {
+        q: "Which Kryptonian superhero was raised by Jonathan and Martha Kent?",
+        options: ["Martian Manhunter", "Shazam", "Superman", "Captain Marvel"],
+        ans: 2,
+        exp: "Born on the planet Krypton as Kal-El, Superman was raised in Kansas by Jonathan and Martha Kent."
+      },
+      {
+        q: "The radioactive bite of which creature gave Peter Parker his powers?",
+        options: ["Scorpion", "Spider", "Ant", "Wasp"],
+        ans: 1,
+        exp: "Peter Parker gained his superhuman abilities after being bitten by a radioactive spider."
+      },
+      {
+        q: "Which superhero was sculpted from clay and brought to life by the gods in some versions of her origin?",
+        options: ["Supergirl", "Hawkgirl", "Wonder Woman", "Zatanna"],
+        ans: 2,
+        exp: "In traditional DC Comics lore, Wonder Woman was sculpted from clay and brought to life by the Greek gods."
+      },
+      {
+        q: "Which superhero, known as the Scarlet Speedster, draws his powers from the Speed Force?",
+        options: ["Quicksilver", "The Flash", "Kid Flash", "Sonic"],
+        ans: 1,
+        exp: "The Flash derives his incredible speed from the Speed Force, an extra-dimensional energy field."
+      },
+      {
+        q: "Whose shield is famously made of vibranium?",
+        options: ["Falcon", "Winter Soldier", "Captain America", "U.S. Agent"],
+        ans: 2,
+        exp: "Captain America's nearly indestructible shield is made primarily of vibranium, a rare, fictional metal known for absorbing kinetic energy."
+      },
+      {
+        q: "Which superhero is the king of the fictional African nation of Wakanda?",
+        options: ["Luke Cage", "Blue Marvel", "Black Panther", "Bishop"],
+        ans: 2,
+        exp: "T'Challa is both the Black Panther and the king of Wakanda."
+      }
+    ]
+  },
+  {
     id: 3,
     title: "Famous Landmarks of the World",
     desc: "Can you identify these iconic sites from a single photo?",

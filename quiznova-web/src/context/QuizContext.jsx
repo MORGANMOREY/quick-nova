@@ -13,6 +13,8 @@ import { useToast } from './ToastContext';
 
 const QuizContext = createContext(null);
 
+const DATA_VERSION = 'v4';
+
 export function QuizProvider({ children }) {
   const { addToast } = useToast();
 
@@ -27,8 +29,20 @@ export function QuizProvider({ children }) {
 
   const [featuredQuizzes, setFeaturedQuizzes] = useState(() => {
     try {
+      if (localStorage.getItem('quiznova_data_version') !== DATA_VERSION) {
+        localStorage.setItem('quiznova_data_version', DATA_VERSION);
+        localStorage.removeItem('quiznova_featured_quizzes');
+        localStorage.removeItem('quiznova_new_quizzes');
+        return FEATURED_QUIZZES;
+      }
       const saved = localStorage.getItem('quiznova_featured_quizzes');
-      return saved ? JSON.parse(saved) : FEATURED_QUIZZES;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length >= FEATURED_QUIZZES.length) {
+          return parsed;
+        }
+      }
+      return FEATURED_QUIZZES;
     } catch {
       return FEATURED_QUIZZES;
     }
@@ -36,6 +50,9 @@ export function QuizProvider({ children }) {
 
   const [newQuizzes, setNewQuizzes] = useState(() => {
     try {
+      if (localStorage.getItem('quiznova_data_version') !== DATA_VERSION) {
+        return NEW_QUIZZES;
+      }
       const saved = localStorage.getItem('quiznova_new_quizzes');
       return saved ? JSON.parse(saved) : NEW_QUIZZES;
     } catch {
@@ -93,24 +110,19 @@ export function QuizProvider({ children }) {
         if (featuredFromBackend.length > 0) {
           setFeaturedQuizzes((prev) => {
             const map = new Map();
-            featuredFromBackend.forEach((q) => {
+            FEATURED_QUIZZES.forEach((q) => {
               const key = (q.title || '').trim().toLowerCase();
               if (key) map.set(key, q);
             });
             prev.forEach((q) => {
               const key = (q.title || '').trim().toLowerCase();
+              if (key) map.set(key, q);
+            });
+            featuredFromBackend.forEach((q) => {
+              const key = (q.title || '').trim().toLowerCase();
               if (key) {
-                const backendItem = map.get(key);
-                if (backendItem) {
-                  map.set(key, {
-                    ...backendItem,
-                    ...q,
-                    questions:
-                      q.questions && q.questions.length > 0 ? q.questions : backendItem.questions,
-                  });
-                } else {
-                  map.set(key, q);
-                }
+                const existing = map.get(key);
+                map.set(key, existing ? { ...existing, ...q, questions: q.questions && q.questions.length > 0 ? q.questions : existing.questions } : q);
               }
             });
             return Array.from(map.values());

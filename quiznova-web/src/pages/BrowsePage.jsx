@@ -88,67 +88,67 @@ export default function BrowsePage({ isAllQuizzesView = false, searchQuery: exte
 
   return (
     <div className="main-container">
-      {isAllQuizzesView && (
-        <span
-          className="back-link"
-          style={{ cursor: 'pointer', display: 'inline-block', marginBottom: '1.25rem' }}
-          onClick={() => navigate('/')}
-        >
-          ← BACK TO HOME & GAMES
-        </span>
-      )}
-
-      <div className="header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-        <h1 style={{ margin: 0 }}>
-          {queryParam
-            ? `Search Results for "${queryParam}"`
-            : isAllQuizzesView
-            ? 'All Quizzes & Games'
-            : 'Quizzes'}
-        </h1>
-        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
-          <select
-            className="category-dropdown"
-            value={categoryFilter}
-            onChange={(e) => setCategoryFilter(e.target.value)}
-            style={{ background: 'var(--glass-bg)', color: 'var(--text-main)', border: '1px solid var(--border-subtle)', borderRadius: '8px', padding: '0.4rem 0.8rem', cursor: 'pointer' }}
-          >
-            {CATEGORIES.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
-          <select
-            value={difficultyFilter}
-            onChange={(e) => setDifficultyFilter(e.target.value)}
-            style={{ background: 'var(--glass-bg)', color: 'var(--text-main)', border: '1px solid var(--border-subtle)', borderRadius: '8px', padding: '0.4rem 0.8rem', cursor: 'pointer' }}
-          >
-            {DIFFICULTIES.map((d) => (
-              <option key={d} value={d}>
-                {d}
-              </option>
-            ))}
-          </select>
-          <div style={{ display: 'flex', background: 'var(--glass-bg)', border: '1px solid var(--border-subtle)', borderRadius: '8px', overflow: 'hidden' }}>
-            <button
-              onClick={() => setViewMode('grid')}
-              style={{ padding: '0.4rem 0.8rem', background: viewMode === 'grid' ? 'var(--accent-1)' : 'transparent', color: viewMode === 'grid' ? '#fff' : 'var(--text-muted)', border: 'none', cursor: 'pointer' }}
-            >
-              🔲 Grid
-            </button>
-            <button
-              onClick={() => setViewMode('list')}
-              style={{ padding: '0.4rem 0.8rem', background: viewMode === 'list' ? 'var(--accent-1)' : 'transparent', color: viewMode === 'list' ? '#fff' : 'var(--text-muted)', border: 'none', cursor: 'pointer' }}
-            >
-              📄 List
-            </button>
-          </div>
-        </div>
-      </div>
-
       {isFilteredOrSearch ? (
         <>
+          {isAllQuizzesView && (
+            <span
+              className="back-link"
+              style={{ cursor: 'pointer', display: 'inline-block', marginBottom: '1.25rem' }}
+              onClick={() => navigate('/')}
+            >
+              ← BACK TO HOME & GAMES
+            </span>
+          )}
+
+          <div className="header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
+            <h1 style={{ margin: 0 }}>
+              {queryParam
+                ? `Search Results for "${queryParam}"`
+                : isAllQuizzesView
+                ? 'All Quizzes & Games'
+                : 'Quizzes'}
+            </h1>
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+              <select
+                className="category-dropdown"
+                value={categoryFilter}
+                onChange={(e) => setCategoryFilter(e.target.value)}
+                style={{ background: 'var(--glass-bg)', color: 'var(--text-main)', border: '1px solid var(--border-subtle)', borderRadius: '8px', padding: '0.4rem 0.8rem', cursor: 'pointer' }}
+              >
+                {CATEGORIES.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={difficultyFilter}
+                onChange={(e) => setDifficultyFilter(e.target.value)}
+                style={{ background: 'var(--glass-bg)', color: 'var(--text-main)', border: '1px solid var(--border-subtle)', borderRadius: '8px', padding: '0.4rem 0.8rem', cursor: 'pointer' }}
+              >
+                {DIFFICULTIES.map((d) => (
+                  <option key={d} value={d}>
+                    {d}
+                  </option>
+                ))}
+              </select>
+              <div style={{ display: 'flex', background: 'var(--glass-bg)', border: '1px solid var(--border-subtle)', borderRadius: '8px', overflow: 'hidden' }}>
+                <button
+                  onClick={() => setViewMode('grid')}
+                  style={{ padding: '0.4rem 0.8rem', background: viewMode === 'grid' ? 'var(--accent-1)' : 'transparent', color: viewMode === 'grid' ? '#fff' : 'var(--text-muted)', border: 'none', cursor: 'pointer' }}
+                >
+                  🔲 Grid
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  style={{ padding: '0.4rem 0.8rem', background: viewMode === 'list' ? 'var(--accent-1)' : 'transparent', color: viewMode === 'list' ? '#fff' : 'var(--text-muted)', border: 'none', cursor: 'pointer' }}
+                >
+                  📄 List
+                </button>
+              </div>
+            </div>
+          </div>
+
           {filteredQuizzes.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '4rem 2rem', color: 'var(--text-muted)', background: 'var(--glass-bg)', borderRadius: '16px', border: '1px solid var(--border-subtle)', marginTop: '1rem' }}>
               <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔍</div>
